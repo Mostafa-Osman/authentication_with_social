@@ -6,7 +6,6 @@ import '../widgets/register_form.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +19,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Column(
                   children: const [
                     Text(
-                      'Sign up',
+                      'Sign in',
                       style:
                           TextStyle(color: Colors.indigo, fontSize: 40.0,fontWeight: FontWeight.bold),
                     ),

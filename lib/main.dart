@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         //     child: const OTPScreen()),
         BlocProvider(create: (context) => ButtonCubit()),
         BlocProvider(
-          create: (context) => AuthCubit(),
+          create: (context) => SocialCubit(),
           child: const RegisterScreen(),
         ),
       ],

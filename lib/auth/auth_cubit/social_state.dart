@@ -1,16 +1,19 @@
 part of 'social_cubit.dart';
 
 @immutable
-abstract class AuthCubitState {}
+abstract class SocialState {}
 
-class AuthCubitInitial extends AuthCubitState {}
+class SocialInitial extends SocialState {}
 
-class RefreshUi extends AuthCubitState {}
+ class RefreshUi extends SocialState {}
+class SignInWithGoogleSuccess extends SocialState {}
+class SignOutWithGoogleSuccess extends SocialState {}
 
-class PhoneOtpLoading extends AuthCubitState {}
-
-class PhoneOtpSuccess extends AuthCubitState {}
-
-class PhoneOtpError extends AuthCubitState {}
-
-class PhoneOtpTimeOut extends AuthCubitState {}
+//
+// class PhoneOtpLoading extends SocialCubitState {}
+//
+// class PhoneOtpSuccess extends SocialCubitState {}
+//
+// class PhoneOtpError extends SocialCubitState {}
+//
+// class PhoneOtpTimeOut extends SocialCubitState {}

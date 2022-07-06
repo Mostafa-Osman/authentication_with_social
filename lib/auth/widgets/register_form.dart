@@ -12,23 +12,23 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final buttonCubit = BlocProvider.of<ButtonCubit>(context);
-    final authCubit = BlocProvider.of<AuthCubit>(context);
+    final authCubit = BlocProvider.of<SocialCubit>(context);
 
-    return BlocConsumer<AuthCubit, AuthCubitState>(
+    return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {
-        if (state is PhoneOtpSuccess) {
-          buttonCubit.changeLoadingStatus();
-          buttonCubit.setButtonStatus();
-          showToast(message: 'successfully login', state: ToastStates.success);
-        } else if (state is PhoneOtpTimeOut) {
-          buttonCubit.changeLoadingStatus();
-
-          showToast(message: 'time out', state: ToastStates.error);
-        } else if (state is PhoneOtpError) {
-          buttonCubit.changeLoadingStatus();
-
-          showToast(message: 'Fail login', state: ToastStates.error);
-        }
+        // if (state is PhoneOtpSuccess) {
+        //   buttonCubit.changeLoadingStatus();
+        //   buttonCubit.setButtonStatus();
+        //   showToast(message: 'successfully login', state: ToastStates.success);
+        // } else if (state is PhoneOtpTimeOut) {
+        //   buttonCubit.changeLoadingStatus();
+        //
+        //   showToast(message: 'time out', state: ToastStates.error);
+        // } else if (state is PhoneOtpError) {
+        //   buttonCubit.changeLoadingStatus();
+        //
+        //   showToast(message: 'Fail login', state: ToastStates.error);
+        // }
       },
       builder: (context, state) {
         return Padding(

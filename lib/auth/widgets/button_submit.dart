@@ -10,7 +10,7 @@ class ButtonSubmit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authCubit = BlocProvider.of<AuthCubit>(context);
+    final authCubit = BlocProvider.of<SocialCubit>(context);
 
     final buttonCubit = BlocProvider.of<ButtonCubit>(context);
     return BlocBuilder<ButtonCubit, ButtonCubitState>(
@@ -25,17 +25,17 @@ class ButtonSubmit extends StatelessWidget {
           width: double.infinity,
           tittle: 'Submit',
           onPress: () async {
-            authCubit.verifyNumber();
+           // authCubit.verifyNumber();
 
             buttonCubit.changeLoadingStatus();
             Future.delayed(const Duration(milliseconds: 3000), () {
               buttonCubit.setButtonStatus();
             });
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const OtpScreen()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const OtpScreen()),
+            // );
           },
         );
       },
