@@ -1,9 +1,11 @@
-import 'package:authentication/auth/Screens/register_screen.dart';
+import 'package:authentication/auth/login/Screens/login_screen.dart';
+import 'package:authentication/auth/login/login_cubit/login_cubit.dart';
+import 'package:authentication/auth/register/register_cubit/register_cubit.dart';
+import 'package:authentication/auth/register/screens/register_screen.dart';
 import 'package:authentication/shared/components/customButton/button_cubit/button_cubit_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'auth/auth_cubit/social_cubit.dart';
 import 'my_bloc_observer.dart';
 
 Future<void> main() async {
@@ -26,10 +28,14 @@ class MyApp extends StatelessWidget {
         // BlocProvider(
         //     create: (_) => RegisterCubit(RegisterRepository()),
         //     child: const OTPScreen()),
-        BlocProvider(create: (context) => ButtonCubit()),
+        // BlocProvider(create: (context) => ButtonCubit()),
         BlocProvider(
-          create: (context) => SocialCubit(),
+          create: (context) => RegisterCubit(),
           child: const RegisterScreen(),
+        ),
+        BlocProvider(
+          create: (context) => LoginCubit(),
+          child: const LoginScreen(),
         ),
       ],
       child: MaterialApp(
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const RegisterScreen(),
+        home: const LoginScreen(),
       ),
     );
   }

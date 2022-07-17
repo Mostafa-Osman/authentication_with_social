@@ -1,20 +1,39 @@
 import 'dart:developer';
 
-import 'package:authentication/home/screen/home.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+part 'login_state.dart';
 
-part 'social_state.dart';
-
-class SocialCubit extends Cubit<SocialState> {
-  SocialCubit() : super(SocialInitial());
+class LoginCubit extends Cubit<LoginState> {
+  LoginCubit() : super(LoginInitial());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool passwordIsVisibility = true;
+   final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> loginWithEmailAndPass() async {
+    emit(const LoginLoading());
+    try {
+      final loginResult = await auth.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      log(loginResult.user!.uid);
+      emit(const LoginSuccess());
+    } catch (e, s) {
+      emit(const LoginError());
+      log('Error in login :$e', stackTrace: s);
+    }
+  }
+
+  void changePasswordVisibility() {
+    passwordIsVisibility = !passwordIsVisibility;
+    emit(RefreshUi());
+  }
+
   // final otpController = TextEditingController();
-  // final FirebaseAuth auth = FirebaseAuth.instance;
   //
   // //otp
   // void verifyNumber() {
@@ -42,7 +61,8 @@ class SocialCubit extends Cubit<SocialState> {
   // login with google account
   final _googleSignIn = GoogleSignIn();
   GoogleSignInAccount? googleAccount;
-  loginWithGoogle( ) async {
+
+  loginWithGoogle() async {
     googleAccount = await _googleSignIn.signIn();
     emit(SignInWithGoogleSuccess());
   }

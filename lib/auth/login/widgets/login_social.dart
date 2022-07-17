@@ -1,34 +1,32 @@
-import 'package:authentication/auth/auth_cubit/social_cubit.dart';
-import 'package:authentication/home/screen/home.dart';
-import 'package:authentication/shared/components/customButton/CustomButton.dart';
+import 'package:authentication/auth/login/login_cubit/login_cubit.dart';
+import 'package:authentication/profile/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
-class RegisterWithSocial extends StatelessWidget {
-  const RegisterWithSocial({Key? key}) : super(key: key);
+class LoginWithSocial extends StatelessWidget {
+  const LoginWithSocial({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SocialCubit, SocialState>(
+    return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is SignInWithGoogleSuccess) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            MaterialPageRoute(builder: (context) => const ProfileScreen()),
           );
         } else if (state is SignOutWithGoogleSuccess) {
           Navigator.pop(context);
         }
       },
       builder: (context, state) {
-        return    Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
               onTap: () {
-                BlocProvider.of<SocialCubit>(context).loginWithGoogle();
+                BlocProvider.of<LoginCubit>(context).loginWithGoogle();
               },
               child: Container(
                 height: 50.0,
