@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final String tittle;
+  final String title;
   final VoidCallback onPress;
-  final bool isLoading;
-  final bool isLoadingDone;
   final bool? text;
   final Color? backgroundColor;
   final Color? textColor;
@@ -15,16 +13,14 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton(
   {Key? key,
-    required this.tittle,
+    required this.title,
     required this.onPress,
-    this.isLoading = false,
-    this.isLoadingDone = false,
     this.height = 50.0,
     this.width = double.infinity,
     this.text = true,
     this.textColor,
-    this.backgroundColor = const Color(0xFFA01B22),
-    this.textSize,
+    this.backgroundColor =const Color(0xFF7466E3),
+  this.textSize,
     this.fontWeight,
   }): super(key: key);
 
@@ -33,18 +29,13 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       height: height,
       width: width,
-      child: (isLoading||isLoadingDone)
-          ? SmallButton(
-              isLoadingDone: isLoadingDone,
-            )
-          : OutlinedButton(
+      child:  OutlinedButton(
               style: OutlinedButton.styleFrom(
-                // shape: const StadiumBorder(),
                 backgroundColor: backgroundColor,
               ),
               onPressed: onPress,
               child: Text(
-                tittle,
+                title,
                 style: TextStyle(
                     fontSize: textSize,
                     color: textColor,

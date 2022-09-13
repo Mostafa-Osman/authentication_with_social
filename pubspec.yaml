@@ -16,7 +16,7 @@ dependencies:
   firebase_auth: ^3.3.15
   fluttertoast: ^8.0.8
   font_awesome_flutter: ^9.0.0
-  flutter_svg: ^1.0.3
+  flutter_svg: ^1.0.0
   http: ^0.13.4
   pin_code_fields: ^7.3.0
   shimmer: ^2.0.0

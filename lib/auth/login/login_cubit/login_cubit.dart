@@ -13,7 +13,8 @@ class LoginCubit extends Cubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool passwordIsVisibility = true;
-   final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  bool isLoginWithPhone = false;
 
   Future<void> loginWithEmailAndPass() async {
     emit(const LoginLoading());
@@ -21,6 +22,16 @@ class LoginCubit extends Cubit<LoginState> {
       final loginResult = await auth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       log(loginResult.user!.uid);
+      emit(const LoginSuccess());
+    } catch (e, s) {
+      emit(const LoginError());
+      log('Error in login :$e', stackTrace: s);
+    }
+  }
+  Future<void> loginWithPhoneNumber() async {
+    emit(const LoginLoading());
+    try {
+      final loginResult = await auth.signInWithPhoneNumber(emailController.text);
       emit(const LoginSuccess());
     } catch (e, s) {
       emit(const LoginError());
@@ -62,13 +73,24 @@ class LoginCubit extends Cubit<LoginState> {
   final _googleSignIn = GoogleSignIn();
   GoogleSignInAccount? googleAccount;
 
-  loginWithGoogle() async {
-    googleAccount = await _googleSignIn.signIn();
-    emit(SignInWithGoogleSuccess());
+  Future<void> loginWithGoogle() async {
+    emit(SignInWithGoogleLoading());
+    try {
+      googleAccount = await _googleSignIn.signIn();
+      emit(SignInWithGoogleSuccess());
+    } catch (e, s) {
+      emit(SignInWithGoogleError());
+      log('Error in login :$e', stackTrace: s);
+    }
   }
 
   loggOut() async {
     googleAccount = await _googleSignIn.signOut();
     emit(SignOutWithGoogleSuccess());
+  }
+
+  void selectLoginType({required bool loginWithPhone}) {
+    isLoginWithPhone = loginWithPhone;
+    emit(RefreshUi());
   }
 }

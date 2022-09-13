@@ -23,11 +23,14 @@ class LoginError extends LoginState {
   const LoginError() : super(isLoading: false);
 }
 
+class SignInWithGoogleLoading extends LoginState {}
+
 class SignInWithGoogleSuccess extends LoginState {}
 
 class SignOutWithGoogleSuccess extends LoginState {}
 
-//
+class SignInWithGoogleError extends LoginState {}
+
 // class PhoneOtpLoading extends SocialCubitState {}
 //
 // class PhoneOtpSuccess extends SocialCubitState {}

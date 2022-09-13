@@ -10,20 +10,21 @@ class ButtonSubmit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginCubit = BlocProvider.of<LoginCubit>(context);
-  //  final buttonCubit = BlocProvider.of<ButtonCubit>(context);
     return CustomButton(
       height: 50.0,
       textSize: 18.0,
       textColor: Colors.white,
       fontWeight: FontWeight.w500,
-     // isLoading: buttonCubit.isLoading,
-      //isLoadingDone: buttonCubit.isLoadingDone,
       width: double.infinity,
-      tittle: 'Submit',
+      title: 'Submit',
       onPress: () async {
         // authCubit.verifyNumber();
-        if (loginCubit.formKey.currentState!.validate()) {
-        await  loginCubit.loginWithEmailAndPass();
+        if (loginCubit.isLoginWithPhone) {
+          loginCubit.loginWithPhoneNumber();
+        } else {
+          if (loginCubit.formKey.currentState!.validate()) {
+            await loginCubit.loginWithEmailAndPass();
+          }
         }
 
         //
@@ -38,10 +39,6 @@ class ButtonSubmit extends StatelessWidget {
         // );
       },
     );
-      // BlocBuilder<ButtonCubit, ButtonCubitState>(
-      // builder: (context, state) {
-      //   return
-      // },
-   // );
+
   }
 }
